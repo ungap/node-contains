@@ -1,0 +1,40 @@
+{
+  "name": "@ungap/node-contains",
+  "version": "0.1.0",
+  "description": "An Node contains polyfill",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "unpkg": "min.js",
+  "scripts": {
+    "build": "npm run cjs && npm run esm && npm run min && npm run test && npm run size",
+    "cjs": "cp index.js cjs/ && echo 'module.exports = nodeContains;' >> cjs/index.js",
+    "esm": "cp index.js esm/ && echo 'export default nodeContains;' >> esm/index.js",
+    "min": "uglifyjs index.js --support-ie8 --comments=/^!/ -c -m -o min.js",
+    "size": "cat index.js | wc -c && cat min.js | wc -c && gzip -c9 min.js | wc -c && cat min.js | brotli | wc -c",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "test": "istanbul cover test/index.js"
+  },
+  "keywords": [
+    "Element",
+    "matches",
+    "polyfill",
+    "legacy"
+  ],
+  "author": "Andrea Giammarchi",
+  "license": "ISC",
+  "devDependencies": {
+    "basichtml": "^1.1.2",
+    "coveralls": "^3.0.9",
+    "istanbul": "^0.4.5",
+    "uglify-js": "^3.7.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ungap/node-contains.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ungap/node-contains/issues"
+  },
+  "homepage": "https://github.com/ungap/node-contains#readme",
+  "dependencies": {}
+}
